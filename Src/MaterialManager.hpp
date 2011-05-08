@@ -14,7 +14,7 @@ public:
     QStringList getMaterialList(const QString & Path);
     QString     getFileName(const QString& Material);
     QString     getWorkDir();
-
+    void        addMaterial(const QString &script, const QString &name);
 private:
     std::vector<Ogre::Material*>   mats;
     Ogre::MaterialPtr              currentMaterial;

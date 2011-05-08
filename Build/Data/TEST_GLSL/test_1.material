@@ -16,11 +16,22 @@ material Mat
 		{
 			vertex_program_ref GLSL/vsTest
 			{
-
 			}
 			fragment_program_ref GLSL/fsTest
 			{
-				
+				param_named normalMap int 0
+				param_named texMap int 1
+				param_named SkyColor    float4 1.0 1.0 1.0 1.0
+				param_named GroundColor float4 0.0 0.0 0.0 0.0
+				param_named Accessibility float 0.5
+			}
+			texture_unit
+			{
+				texture normal_viking.png
+			}
+			texture_unit
+			{
+				texture sphere.png
 			}
 		}
 	}

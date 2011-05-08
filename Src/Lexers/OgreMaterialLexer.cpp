@@ -26,6 +26,7 @@ const char* OgreMaterialLexer::language() const
 QString OgreMaterialLexer::description(int style) const
 {
     return QString("No Style");
+    style++; // Suppress warning
 }
 
 const char *OgreMaterialLexer::keywords(int set) const

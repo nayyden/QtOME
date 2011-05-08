@@ -112,7 +112,7 @@ void TestWidget::createScene(void)
 
 	// Setup the actual scene
 	Ogre::Light* l = m_sceneMgr->createLight("MainLight");
-        l->setPosition(100, 100, 200);
+        l->setPosition(100, 100, -100);
 
         // Init camera target ================================>
         Ogre::ManualObject* target = m_sceneMgr->createManualObject("target");
@@ -244,9 +244,6 @@ void TestWidget::setupScene(void) {
 
         // Add the listener to the current log
         mLog->addListener(mLogListener);
-
-
-
 }
 
 void TestWidget::setSplash(QSplashScreen * splash)

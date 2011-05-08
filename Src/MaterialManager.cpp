@@ -43,3 +43,11 @@ QString MaterialManager::getWorkDir()
 {
     return workDir;
 }
+
+void MaterialManager::addMaterial(const QString &script, const QString &name)
+{
+    Ogre::MemoryDataStream *memoryStream = new Ogre::MemoryDataStream(Ogre::String(script.toStdString()), script.length() * sizeof(char));
+    Ogre::DataStreamPtr dataStream(memoryStream);
+    Ogre::MaterialManager::getSingleton().parseScript(dataStream, Ogre::ResourceGroupManager::DEFAULT_RESOURCE_GROUP_NAME);
+    fileNames.insert(name, workDir + name + ".material");
+}

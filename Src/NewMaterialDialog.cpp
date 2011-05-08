@@ -41,6 +41,8 @@ void NewMaterialDialog::accept()
                  return;
         QTextStream file(&matFile);
         file << "material " << ui->materialName->text() << "\n{\n\t\n}";
+        QString matSrc = "material " + ui->materialName->text() + "\n{\n\t\n}";
+        matMgr->addMaterial(matSrc, ui->materialName->text());
         matFile.close();
         this->close();
     }
