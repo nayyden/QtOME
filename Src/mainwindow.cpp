@@ -172,10 +172,11 @@ void MainWindow::newProject()
 
     ui->listWidget->clear();
     QStringList materials = ui->OgreWidget->manager->getMaterialList(Path);
-    ui->listWidget->addItems(materials);
+    QStringList compositors = ui->OgreWidget->manager->getCompositorList();
 
     this->populateWorkSpaceTree(materials);
 
+    ui->listWidget->addItems(compositors);
 }
 
 void MainWindow::materialSelected()
@@ -301,4 +302,16 @@ void MainWindow::saveAll()
     ui->textEdit->saveFile();
     ui->VP->saveFile();
     ui->FP->saveFile();
+}
+void MainWindow::applyCompositor()
+{
+    Ogre::String script(QString(ui->Compositor->text()).toStdString());
+    Ogre::MemoryDataStream *memoryStream = new Ogre::MemoryDataStream((void*)script.c_str(), script.length() * sizeof(char));
+    Ogre::DataStreamPtr dataStream(memoryStream);
+    ui->OgreWidget->applyCompositor(dataStream);
+}
+void MainWindow::openCompositorFile(QListWidgetItem *item)
+{
+    ui->Compositor->openFile(MaterialManager::getSingleton().getCompositorFileName(item->text()));
+    Ogre::LogManager::getSingleton().logMessage(item->text().toStdString());
 }

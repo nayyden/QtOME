@@ -42,10 +42,8 @@ public:
         void setMaterial(const Ogre::String &script,const Ogre::String& matName, const Ogre::String &VP = "", const Ogre::String &FP = "");
         void clearMaterial();
         QString changeMesh(QString fullname);
-
-
-
         MaterialManager       *manager;
+        void applyCompositor(Ogre::DataStreamPtr script);
 protected:
 	//
 	// ########## Protected functions ##########
@@ -86,7 +84,7 @@ protected:
 
 
 
-            //keeps track of mesh names for mesh replacing in changeMesh()
+        //keeps track of mesh names for mesh replacing in changeMesh()
 	//
 	// ########## Private constants ##########
 	//

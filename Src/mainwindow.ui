@@ -205,6 +205,7 @@
     <bool>false</bool>
    </attribute>
    <addaction name="action_Apply"/>
+   <addaction name="actionSSAO"/>
   </widget>
   <widget class="QDockWidget" name="workspaceDock">
    <property name="features">
@@ -342,6 +343,27 @@
     </layout>
    </widget>
   </widget>
+  <widget class="QDockWidget" name="compositorDock">
+   <property name="windowTitle">
+    <string>Compositor Script</string>
+   </property>
+   <attribute name="dockWidgetArea">
+    <number>2</number>
+   </attribute>
+   <widget class="QWidget" name="wCompositor">
+    <layout class="QHBoxLayout" name="horizontalLayout_3">
+     <property name="spacing">
+      <number>1</number>
+     </property>
+     <property name="margin">
+      <number>1</number>
+     </property>
+     <item>
+      <widget class="TextEdit" name="Compositor"/>
+     </item>
+    </layout>
+   </widget>
+  </widget>
   <action name="action_New">
    <property name="text">
     <string>&amp;New</string>
@@ -428,6 +450,11 @@
     <string>getParams</string>
    </property>
   </action>
+  <action name="actionSSAO">
+   <property name="text">
+    <string>SSAO</string>
+   </property>
+  </action>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
  <customwidgets>
@@ -438,6 +465,7 @@
    <container>1</container>
    <slots>
     <slot>getGPUParams()</slot>
+    <slot>enableSSAO()</slot>
    </slots>
   </customwidget>
   <customwidget>
@@ -568,7 +596,7 @@
    <sender>listWidget</sender>
    <signal>itemDoubleClicked(QListWidgetItem*)</signal>
    <receiver>MainWindow</receiver>
-   <slot>setCurrentMatName(QListWidgetItem*)</slot>
+   <slot>openCompositorFile(QListWidgetItem*)</slot>
    <hints>
     <hint type="sourcelabel">
      <x>1309</x>
@@ -596,6 +624,22 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>actionSSAO</sender>
+   <signal>triggered()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>applyCompositor()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>540</x>
+     <y>289</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>loadFile()</slot>
@@ -605,5 +649,7 @@
   <slot>newProject()</slot>
   <slot>setCurrentMatName(QListWidgetItem*)</slot>
   <slot>saveAll()</slot>
+  <slot>applyCompositor()</slot>
+  <slot>openCompositorFile(QListWidgetItem*)</slot>
  </slots>
 </ui>

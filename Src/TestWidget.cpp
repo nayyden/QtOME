@@ -244,6 +244,8 @@ void TestWidget::setupScene(void) {
 
         // Add the listener to the current log
         mLog->addListener(mLogListener);
+
+
 }
 
 void TestWidget::setSplash(QSplashScreen * splash)
@@ -385,3 +387,14 @@ void TestWidget::clearMaterial()
     Ogre::MaterialManager::getSingletonPtr()->remove(currentMaterial->getHandle());
 }
 
+void TestWidget::applyCompositor(Ogre::DataStreamPtr script)
+{
+    Ogre::String name = MaterialManager::getSingleton().getCompositorName();
+
+    Ogre::CompositorManager::getSingleton().setCompositorEnabled(m_vp, name, false);
+    Ogre::CompositorManager::getSingleton().removeCompositor(m_vp, name);
+    Ogre::CompositorManager::getSingleton().unload(name);
+    Ogre::CompositorManager::getSingleton().parseScript(script,Ogre::ResourceGroupManager::DEFAULT_RESOURCE_GROUP_NAME);
+    Ogre::CompositorManager::getSingleton().addCompositor(m_vp, name);
+    Ogre::CompositorManager::getSingleton().setCompositorEnabled(m_vp, name, true);
+}

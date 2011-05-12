@@ -9,6 +9,7 @@ MaterialManager::MaterialManager()
 
 QStringList MaterialManager::getMaterialList(const QString & Path)
 {
+    // returns list of all materials already loaded by Ogre
     QStringList       list;
     QString           name;
     Ogre::MaterialPtr ptr;
@@ -34,9 +35,42 @@ QStringList MaterialManager::getMaterialList(const QString & Path)
     return list;
 }
 
+QStringList MaterialManager::getCompositorList()
+{
+    // returns list of all compositors already loaded by Ogre
+    QStringList       list;
+    QString           name;
+    Ogre::MaterialPtr ptr;
+
+    Ogre::ResourceManager::ResourceMapIterator compositorIterator = Ogre::CompositorManager::getSingletonPtr()->getResourceIterator();
+    while (compositorIterator.hasMoreElements())
+    {
+        ptr = (static_cast<Ogre::CompositorPtr>(compositorIterator.peekNextValue()));
+        if(!ptr.getPointer()->getOrigin().empty())
+        {
+            list.push_back(name.fromStdString(ptr.getPointer()->getName()));
+            fileNames_Compositor.insert(name.fromStdString(ptr.getPointer()->getName()), workDir + ptr.getPointer()->getOrigin().c_str());
+        }
+        compositorIterator.moveNext();
+    }
+
+    return list;
+}
+
 QString MaterialManager::getFileName(const QString &Material)
 {
     return fileNames[Material];
+}
+
+QString MaterialManager::getCompositorFileName(const QString &Compositor)
+{
+    compositorName = Compositor;
+    return fileNames_Compositor[Compositor];
+}
+
+Ogre::String MaterialManager::getCompositorName()
+{
+    return compositorName.toStdString();
 }
 
 QString MaterialManager::getWorkDir()

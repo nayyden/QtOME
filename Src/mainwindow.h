@@ -39,6 +39,8 @@ private:
     QString     currMatName;
 
 private slots:
+    void applyCompositor();
+    void openCompositorFile(QListWidgetItem *item);
     void loadFile();
     void saveMatScript();
     void importMesh();
